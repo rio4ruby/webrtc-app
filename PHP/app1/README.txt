@@ -1,4 +1,4 @@
-AT&T API Platform Samples - AAB App 1
+AT&T API Platform Samples - WebRTC App 1
 -------------------------------------
 
 This application demonstrates the usage of Device Capabilities API of AT&T platform. 
