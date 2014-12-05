@@ -1,0 +1,17 @@
+port:             4567
+proxy: 
+client_id:          
+client_secret:       
+account_domain: '@ddtwebrtc.org'
+fqdn:   'https://api.att.com'
+consent_redirect: 
+session_secret: 'super secret session key'
+
+e911id: 'valid e911 id'
+vtn_numbers: '5555555555'
+
+github_server_link: 'http://github.com'
+github_client_link: 'http://github.com'
+source_link: #
+download_link: #
+help_link: #

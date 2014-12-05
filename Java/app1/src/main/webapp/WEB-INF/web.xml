@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  <display-name>webrtc</display-name>
+  <welcome-file-list>
+    <welcome-file>WebRTC.jsp</welcome-file>
+  </welcome-file-list>
+  <display-name>AT&amp;T WebRTC Sample Application</display-name>
+
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.att.api.webrtc.controller.WebRTCController</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>GetToken</servlet-name>
+    <servlet-class>com.att.api.webrtc.controller.GetTokenController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Associate</servlet-name>
+    <servlet-class>com.att.api.webrtc.controller.AssociateController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AuthcodeRedirect</servlet-name>
+    <servlet-class>com.att.api.webrtc.controller.AuthcodeRedirectController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index.jsp</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/WebRTC.jsp</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetToken</servlet-name>
+    <url-pattern>/oauth/token</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Associate</servlet-name>
+    <url-pattern>/oauth/associate</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AuthcodeRedirect</servlet-name>
+    <url-pattern>/oauth/authorize</url-pattern> 
+  </servlet-mapping>
+
+</web-app>

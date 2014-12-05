@@ -1,0 +1,3 @@
+[submodule "submodules/codekit"]
+	path = submodules/codekit
+	url = https://github.com/attdevsupport/codekit-ruby.git
