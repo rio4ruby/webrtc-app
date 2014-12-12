@@ -35,7 +35,11 @@ try {
     );
     echo json_encode($arr);
 } catch (Exception $e) {
-    http_response_code(500);
+    if (function_exists('http_response_code')) {
+        http_response_code(500);
+    } else {
+        header("HTTP/1.1 500 Internal Server Error");
+    }
     echo json_encode($e->getMessage());
 }
     

@@ -367,15 +367,12 @@
               <p>Start a session and end a session.</p>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <input name="e911" type="text" class="form-control" value="${cfg.e911Id}"
-                          placeholder="E911 ID">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="updateE911" data-loading-text="Updating e911 id..." type="button" class="btn btn-primary hidden">
-                        Update E911 address
-                      </button>
+                  <div id="e911">
+                    <label for="e911in">E911 ID:</label>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <input id="e911in" name="e911" type="text" class="form-control" value="${cfg.e911Id}" placeholder="E911 ID">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -429,8 +426,8 @@
                         <div class="col-lg-4">
                           <label>Select Media Options:</label>
                           <select name="callType" class="form-control">
-                            <option value="audio">Audio</option>
-                            <option value="video">Audio+Video</option>
+                            <option value="audio">Audio Only</option>
+                            <option value="video">Audio and Video</option>
                           </select>
                         </div><!--/.col-lg-4-->
                       </div><!--/.row-->
@@ -459,7 +456,14 @@
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Remote video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Remote:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="remoteAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="remoteVideoElement">
@@ -469,7 +473,14 @@
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Local Video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Local:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="localAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="localVideoElement">
@@ -560,7 +571,14 @@
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Remote video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Remote video:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="confRemoteAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="confRemoteVideoElement">
@@ -570,7 +588,14 @@
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Local Video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Local Video:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="confLocalAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="confLocalVideoElement">
@@ -1007,7 +1032,6 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/associate</sp
               <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#startSessionSource" role="tab" data-toggle="tab">Start Session</a></li>
                 <li><a href="#endSessionSource" role="tab" data-toggle="tab">End Session</a></li>
-                <li><a href="#updateE911Source" role="tab" data-toggle="tab">Update E911</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="startSessionSource">
@@ -1022,15 +1046,6 @@ phone.login(<span class="Identifier">{</span>
                 <div class="tab-pane" id="endSessionSource">
 <pre>
 phone.logout();
-</pre>
-                </div><!--./tab-pane-->
-                <div class="tab-pane" id="updateE911Source">
-<pre>
-<span class="Identifier">var</span> e911 = $(view.input.e911).val();
-
-phone.associateE911Id(<span class="Identifier">{</span>
-        e911Id: e911,
-<span class="Identifier">}</span>);
 </pre>
                 </div><!--./tab-pane-->
               </div><!--./tab-content-->

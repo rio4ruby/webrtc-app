@@ -17,8 +17,8 @@
 package com.att.api.webrtc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,10 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.att.api.controller.APIController;
-import com.att.api.oauth.OAuthToken;
 import com.att.api.oauth.OAuthService;
+import com.att.api.oauth.OAuthToken;
 import com.att.api.rest.RESTException;
-import com.att.api.webrtc.model.ConfigBean;
 
 public class GetTokenController extends APIController {
     private static final long serialVersionUID = 1L;
@@ -59,7 +58,10 @@ public class GetTokenController extends APIController {
                 .put("access_token", token.getAccessToken())
                 .put("refresh_token", token.getRefreshToken());
 
-            response.getWriter().write(t.toString());
+            response.setContentType("text/html");
+            PrintWriter writer = response.getWriter();
+            writer.print(t);
+            writer.flush();
         } catch (RESTException e) {
             response.sendError(500, e.getMessage());
         }
@@ -67,9 +69,6 @@ public class GetTokenController extends APIController {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("cfg", new ConfigBean());
-        final String forward = "/WEB-INF/WebRTC.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-        dispatcher.forward(request, response);
+        doPost(request, response);
     }
 }

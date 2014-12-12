@@ -11,7 +11,7 @@ use Att\Api\Util\Util;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AT&amp;T Enhanced WebRTC Sample Application</title>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -91,7 +91,10 @@ use Att\Api\Util\Util;
       <hr>
       <div class="row">
         <div class="col-lg-12">
-          <h4 class="text-center">We created this page to help you evaluate the AT&amp;T Enhanced WebRTC API, and kick-start your development by giving you:</h4>
+          <h4 class="text-center">
+            We created this page to help you evaluate the AT&amp;T Enhanced
+            WebRTC API, and kick-start your development by giving you:
+          </h4>
           <div class="col-sm-1"></div>
           <div class="col-sm-10">
             <ol>
@@ -358,15 +361,12 @@ use Att\Api\Util\Util;
               <p>Start a session and end a session.</p>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <input name="e911" type="text" class="form-control" value="<?php echo $e911Id; ?>"
-                          placeholder="E911 ID">
-                    </div>
-                    <div class="col-lg-4">
-                      <button id="updateE911" data-loading-text="Updating e911 id..." type="button" class="btn btn-primary hidden">
-                        Update E911 address
-                      </button>
+                  <div id="e911">
+                    <label for="e911in">E911 ID:</label>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <input id="e911in" name="e911" type="text" class="form-control" value="<?php echo $e911Id; ?>" placeholder="E911 ID">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -420,8 +420,8 @@ use Att\Api\Util\Util;
                         <div class="col-lg-4">
                           <label>Select Media Options:</label>
                           <select name="callType" class="form-control">
-                            <option value="audio">Audio</option>
-                            <option value="video">Audio+Video</option>
+                            <option value="audio">Audio Only</option>
+                            <option value="video">Audio and Video</option>
                           </select>
                         </div><!--/.col-lg-4-->
                       </div><!--/.row-->
@@ -450,7 +450,14 @@ use Att\Api\Util\Util;
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Remote video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Remote:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="remoteAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="remoteVideoElement">
@@ -460,7 +467,14 @@ use Att\Api\Util\Util;
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Local Video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Local:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="localAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="localVideoElement">
@@ -551,7 +565,14 @@ use Att\Api\Util\Util;
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Remote video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Remote video:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="confRemoteAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="confRemoteVideoElement">
@@ -561,7 +582,14 @@ use Att\Api\Util\Util;
                           <div class="row">
                             <div class="col-lg-6 col-sm-12">
                               <div class="row">
-                                <p>Local Video:</p>
+                                <div class="col-lg-2 col-sm-2">
+                                  <p>Local Video:</p>
+                                </div>
+                                <div class="col-lg-10 col-sm-10">
+                                  <div id="confLocalAudioElement">
+                                    <img width="25" height="25" data-file-height="500" data-file-width="500" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/38px-Speaker_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/50px-Speaker_Icon.svg.png 2x" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/25px-Speaker_Icon.svg.png" alt="Speaker Icon.svg">
+                                  </div>
+                                </div>
                               </div>
                               <div class="row">
                                 <video id="confLocalVideoElement">
@@ -713,7 +741,7 @@ use Att\Api\Util\Util;
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="ruby_consent">
-<pre id="vimCodeElement">
+<pre>
 <span class="Comment"># Return the url required for consent to the SDK</span>
 post <span class="SpecialChar">'</span><span class="String">/oauth/authorize</span><span class="SpecialChar">'</span> <span class="Statement">do</span>
   url = <span class="Type">AuthCodeService</span>.generateConsentFlowUrl
@@ -736,6 +764,31 @@ $<span class="Identifier">arr</span> = <span class="Type">array</span><span clas
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="java_consent">
+<pre>
+<span class="Type">public</span> <span class="Type">void</span> doPost(HttpServletRequest request, HttpServletResponse response)
+        <span class="Type">throws</span> ServletException, IOException {
+    <span class="Type">final</span> String FQDN = appConfig.getOauthFQDN();
+    <span class="Type">final</span> String clientId = appConfig.getClientId();
+    <span class="Type">final</span> String redirectUri = appConfig.getProperty(<span class="String">&quot;redirectUri&quot;</span>);
+    <span class="Type">final</span> String redirect = FQDN + <span class="String">&quot;/oauth/v4/authorize?client_id=&quot;</span> +
+        clientId + <span class="String">&quot;&amp;scope=WEBRTCMOBILE&amp;redirect_uri=&quot;</span> + redirectUri;
+
+    <span class="Statement">try</span> {
+        JSONObject json = <span class="Statement">new</span> JSONObject().put(<span class="String">&quot;consent_url&quot;</span>, redirect);
+        response.getWriter().write(json.toString());
+    } <span class="Statement">catch</span> (Exception e) {
+        response.sendError(<span class="Constant">500</span>, e.getMessage());
+    }
+}
+
+<span class="Type">public</span> <span class="Type">void</span> doGet(HttpServletRequest request, HttpServletResponse response)
+        <span class="Type">throws</span> ServletException, IOException {
+    request.setAttribute(<span class="String">&quot;cfg&quot;</span>, <span class="Statement">new</span> ConfigBean());
+    <span class="Type">final</span> String forward = <span class="String">&quot;/WEB-INF/WebRTC.jsp&quot;</span>;
+    RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+    dispatcher.forward(request, response);
+}
+</pre>
                 </div><!--./tab-pane-->
               </div><!--./tab-content-->
             </div><!--./panel-body-->
@@ -763,7 +816,7 @@ $<span class="Identifier">arr</span> = <span class="Type">array</span><span clas
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="ruby_token">
-<pre id='vimCodeElement'>
+<pre>
 <span class="Comment"># Return a token to the SDK</span>
 post <span class="SpecialChar">'</span><span class="String">/oauth/token</span><span class="SpecialChar">'</span> <span class="Statement">do</span>
   <span class="Statement">begin</span>
@@ -792,7 +845,7 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/token</span><
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="php_token">
-<pre id='vimCodeElement'>
+<pre>
 <span class="Statement">try</span> <span class="Special">{</span>
     $<span class="Identifier">tokenSrvc</span> = <span class="PreProc">new</span> OAuthTokenService<span class="Special">(</span>$<span class="Identifier">FQDN</span>, $<span class="Identifier">api_key</span>, $<span class="Identifier">secret_key</span><span class="Special">)</span>;
     $<span class="Identifier">token</span> = <span class="Type">null</span>;
@@ -817,6 +870,46 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/token</span><
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="java_token">
+<pre>
+<span class="Type">public</span> <span class="Type">void</span> doPost(HttpServletRequest request,
+        HttpServletResponse response) <span class="Type">throws</span> ServletException, IOException{
+
+    <span class="Statement">try</span> {
+        <span class="Type">final</span> String FQDN = appConfig.getOauthFQDN();
+        <span class="Type">final</span> String APPID = appConfig.getClientId();
+        <span class="Type">final</span> String APPSECRET = appConfig.getClientSecret();
+
+        <span class="Type">final</span> OAuthService service = <span class="Statement">new</span> OAuthService(FQDN, APPID, APPSECRET);
+
+        OAuthToken token = <span class="Constant">null</span>;
+        <span class="Type">final</span> String code = (String) request.getParameter(<span class="String">&quot;code&quot;</span>);
+        <span class="Statement">if</span> (code != <span class="Constant">null</span>) {
+            token = service.getTokenUsingCode(code);
+        }
+        <span class="Statement">else</span> {
+            token = service.getToken(<span class="String">&quot;WEBRTC&quot;</span>);
+        }
+
+        setSessionToken(request, token);
+
+        JSONObject t = <span class="Statement">new</span> JSONObject()
+            .put(<span class="String">&quot;access_token&quot;</span>, token.getAccessToken())
+            .put(<span class="String">&quot;refresh_token&quot;</span>, token.getRefreshToken());
+
+        response.getWriter().write(t.toString());
+    } <span class="Statement">catch</span> (RESTException e) {
+        response.sendError(<span class="Constant">500</span>, e.getMessage());
+    }
+}
+
+<span class="Type">public</span> <span class="Type">void</span> doGet(HttpServletRequest request, HttpServletResponse response)
+        <span class="Type">throws</span> ServletException, IOException {
+    request.setAttribute(<span class="String">&quot;cfg&quot;</span>, <span class="Statement">new</span> ConfigBean());
+    <span class="Type">final</span> String forward = <span class="String">&quot;/WEB-INF/WebRTC.jsp&quot;</span>;
+    RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+    dispatcher.forward(request, response);
+}
+</pre>
                 </div><!--./tab-pane-->
               </div><!--./tab-content-->
             </div><!--./panel-body-->
@@ -845,17 +938,17 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/token</span><
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="ruby_assoc">
-<pre id='vimCodeElement'>
+<pre>
 post <span class="SpecialChar">'</span><span class="String">/oauth/associate</span><span class="SpecialChar">'</span> <span class="Statement">do</span>
   <span class="Statement">begin</span>
     user = request[<span class="Constant">:user</span>]
-    url = <span class="SpecialChar">&quot;</span><span class="SpecialChar">#{</span><span class="Type">FQDN</span><span class="SpecialChar">}</span><span class="String">/RTC/v1/userIds/</span><span class="SpecialChar">#{</span>user<span class="SpecialChar">}</span><span class="SpecialChar">&quot;</span>
+    url = <span class="SpecialChar">&quot;</span><span class="SpecialChar">&num;span><span class="Type">FQDN</span><span class="SpecialChar">}</span><span class="String">/RTC/v1/userIds/</span><span class="SpecialChar">&num;span>user<span class="SpecialChar">}</span><span class="SpecialChar">&quot;</span>
     token = session[<span class="Constant">:token</span>]
 
     headers = {
       <span class="Constant">:Accept</span> =&gt; <span class="SpecialChar">&quot;</span><span class="String">application/json</span><span class="SpecialChar">&quot;</span>,
       <span class="Constant">:Content_Type</span> =&gt; <span class="SpecialChar">&quot;</span><span class="String">application/json</span><span class="SpecialChar">&quot;</span>,
-      <span class="Constant">:Authorization</span> =&gt; <span class="SpecialChar">&quot;</span><span class="String">Bearer </span><span class="SpecialChar">#{</span>token.access_token<span class="SpecialChar">}</span><span class="SpecialChar">&quot;</span>
+      <span class="Constant">:Authorization</span> =&gt; <span class="SpecialChar">&quot;</span><span class="String">Bearer </span><span class="SpecialChar">&num;span>token.access_token<span class="SpecialChar">}</span><span class="SpecialChar">&quot;</span>
     }
 
     <span class="Type">Transport</span>.put(url, <span class="SpecialChar">&quot;&quot;</span>, headers)
@@ -869,7 +962,7 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/associate</sp
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="php_assoc">
-<pre id='vimCodeElement'>
+<pre>
 <span class="Statement">try</span> <span class="Special">{</span>
     $<span class="Identifier">user</span> = $<span class="Identifier">_POST</span><span class="Special">[</span>'<span class="Constant">user</span>'<span class="Special">]</span>;
     $<span class="Identifier">token</span> = <span class="Identifier">unserialize</span><span class="Special">(</span>$<span class="Identifier">_SESSION</span><span class="Special">[</span>'<span class="Constant">token</span>'<span class="Special">])</span>;
@@ -883,6 +976,32 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/associate</sp
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="java_assoc">
+<pre>
+<span class="Type">public</span> <span class="Type">void</span> doPost(HttpServletRequest request, HttpServletResponse response)
+        <span class="Type">throws</span> ServletException, IOException {
+    <span class="Type">final</span> String FQDN = appConfig.getOauthFQDN();
+    <span class="Type">final</span> String userName = (String) request.getParameter(<span class="String">&quot;user&quot;</span>);
+
+    <span class="Statement">try</span> {
+        <span class="Type">final</span> OAuthToken token = getSessionToken(request, response);
+        <span class="Type">final</span> WebRTCService service = <span class="Statement">new</span> WebRTCService(FQDN, token);
+
+        service.associateToken(userName);
+
+        response.getWriter().write(<span class="String">&quot;&quot;</span>);
+    } <span class="Statement">catch</span> (RESTException e) {
+        response.sendError(<span class="Constant">500</span>, e.getMessage());
+    }
+}
+
+<span class="Type">public</span> <span class="Type">void</span> doGet(HttpServletRequest request, HttpServletResponse response)
+        <span class="Type">throws</span> ServletException, IOException {
+    request.setAttribute(<span class="String">&quot;cfg&quot;</span>, <span class="Statement">new</span> ConfigBean());
+    <span class="Type">final</span> String forward = <span class="String">&quot;/WEB-INF/WebRTC.jsp&quot;</span>;
+    RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+    dispatcher.forward(request, response);
+}
+</pre>
                 </div><!--./tab-pane-->
               </div><!--./tab-content-->
             </div><!--./panel-body-->
@@ -907,11 +1026,10 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/associate</sp
               <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#startSessionSource" role="tab" data-toggle="tab">Start Session</a></li>
                 <li><a href="#endSessionSource" role="tab" data-toggle="tab">End Session</a></li>
-                <li><a href="#updateE911Source" role="tab" data-toggle="tab">Update E911</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="startSessionSource">
-<pre id='vimCodeElement'>
+<pre>
 <span class="Identifier">var</span> e911 = $(view.input.e911).val();
 phone.login(<span class="Identifier">{</span>
     token: token.access_token,
@@ -920,17 +1038,8 @@ phone.login(<span class="Identifier">{</span>
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="endSessionSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.logout();
-</pre>
-                </div><!--./tab-pane-->
-                <div class="tab-pane" id="updateE911Source">
-<pre id='vimCodeElement'>
-<span class="Identifier">var</span> e911 = $(view.input.e911).val();
-
-phone.associateE911Id(<span class="Identifier">{</span>
-        e911Id: e911,
-<span class="Identifier">}</span>);
 </pre>
                 </div><!--./tab-pane-->
               </div><!--./tab-content-->
@@ -962,7 +1071,7 @@ phone.associateE911Id(<span class="Identifier">{</span>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="startCallSource">
-<pre id='vimCodeElement'>
+<pre>
 <span class="Identifier">var</span> ctype = $(view.input.callType).val();
 <span class="Identifier">var</span> number = $(view.input.phoneNumber).val();
 
@@ -975,17 +1084,17 @@ phone.dial(<span class="Identifier">{</span>
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="endCallSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.hangup();
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="rejectCallSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.reject();
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="acceptCallSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.answer(<span class="Identifier">{</span>
         localMedia: $(view.video.local)<span class="Identifier">[</span>0<span class="Identifier">]</span>,
         remoteMedia: $(view.video.remote)<span class="Identifier">[</span>0<span class="Identifier">]</span>
@@ -1018,12 +1127,12 @@ phone.answer(<span class="Identifier">{</span>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="holdCallSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.hold();
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="resumeCallSource">
-<pre id='vimCodeElement'>
+<pre>
 phone.resume();
 </pre>
                 </div><!--./tab-pane-->

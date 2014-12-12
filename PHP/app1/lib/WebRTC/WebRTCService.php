@@ -67,12 +67,12 @@ class WebRTCService extends APIService
 
         $req = new RestfulRequest($endpoint);
 
-        $code = $req
+        $result = $req
             ->setAuthorizationHeader($this->getToken())
             ->setHeader('Content-Type', 'application/json')
-            ->sendHttpPut(new HttpPut(''))
-            ->getResponseCode();
+            ->sendHttpPut(new HttpPut(''));
 
+        $code = $result->getResponseCode();
         if ($code != 204) {
             throw new ServiceException($result->getResponseBody(), $code);
         }

@@ -17,8 +17,8 @@
 package com.att.api.webrtc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.att.api.controller.APIController;
 import com.att.api.oauth.OAuthToken;
 import com.att.api.rest.RESTException;
-import com.att.api.webrtc.model.ConfigBean;
 import com.att.api.webrtc.service.WebRTCService;
 
 public class AssociateController extends APIController {
@@ -44,7 +43,9 @@ public class AssociateController extends APIController {
 
             service.associateToken(userName);
 
-            response.getWriter().write("");
+            PrintWriter writer = response.getWriter();
+            writer.write("");
+            writer.flush();
         } catch (RESTException e) {
             response.sendError(500, e.getMessage());
         }
@@ -53,9 +54,6 @@ public class AssociateController extends APIController {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("cfg", new ConfigBean());
-        final String forward = "/WEB-INF/WebRTC.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-        dispatcher.forward(request, response);
+        doPost(request, response);
     }
 }

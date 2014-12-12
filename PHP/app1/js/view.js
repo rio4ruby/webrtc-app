@@ -24,7 +24,6 @@ var view = {
         accountAssign : '#accountAssign',
         startSession : '#startSession',
         stopSession : '#stopSession',
-        updateE911 : '#updateE911',
         startCall : '#startCall',
         answerCall : '#answerCall',
         rejectCall : '#rejectCall',
@@ -46,6 +45,13 @@ var view = {
         confRemote : '#confRemoteVideoElement',
     },
 
+    audio : {
+        local: '#localAudioElement',
+        remote: '#remoteAudioElement',
+        confLocal : '#confLocalAudioElement',
+        confRemote : '#confRemoteAudioElement',
+    },
+
     div : {
         callId : '#callId',
         confCall : '#confCall',
@@ -58,6 +64,7 @@ var view = {
         video : "#video",
         confVideo : "#confVideo",
         uaMsg: "#useragentMsg",
+        e911: "#e911",
 
         success : {
             vtnToken : '#vtnTokenSuccess',
@@ -139,7 +146,7 @@ var state = {
         state.callStopped();
 
         // Unhide elements
-        $(view.input.e911).removeClass('hidden');
+        $(view.div.e911).removeClass('hidden');
 
         // Reset buttons
         $(view.button.vtnToken).button('reset');
@@ -148,7 +155,6 @@ var state = {
         $(view.button.accountAssign).button('reset');
         $(view.button.startSession).button('reset');
         $(view.button.stopSession).button('reset');
-        $(view.button.updateE911).button('reset');
         $(view.button.startCall).button('reset');
         $(view.button.holdCall).button('reset');
         $(view.button.mobileConsent).button('reset');
@@ -221,7 +227,7 @@ var state = {
 
     accountAssociateSuccess: function() {
         $(view.button.accountAssign).button('reset');
-        $(view.input.e911).addClass('hidden');
+        $(view.div.e911).addClass('hidden');
         $(view.div.error.accountAssociate).addClass('hidden');
         $(view.div.success.accountAssociate).removeClass('hidden');
         $(view.div.session).removeClass('hidden');
@@ -237,16 +243,15 @@ var state = {
 
     sessionStarted: function() {
         // if account else vtn/mobile
-        if ($(view.input.e911).is(':hidden')) {
+        if ($(view.div.e911).is(':hidden')) {
             $(view.button.startSession).data('loading-text', 'Session in progress').button('loading');
-            $(view.input.e911).addClass('hidden');
+            $(view.div.e911).addClass('hidden');
             $(view.button.stopSession).removeClass('hidden');
             $(view.div.callId).removeClass('hidden');
         }
         else {
             $(view.button.startSession).data('loading-text', 'Session in progress').button('loading');
             $(view.button.stopSession).removeClass('hidden');
-            $(view.button.updateE911).removeClass('hidden');
             $(view.div.callId).removeClass('hidden');
         }
     },
@@ -255,7 +260,7 @@ var state = {
         $(view.button.startSession).button('reset');
         $(view.button.stopSession).addClass('hidden');
         $(view.div.callId).addClass('hidden');
-        $(view.button.updateE911).addClass('hidden');
+        state.callStopped();
     },
 
     dialing: function() {
@@ -267,12 +272,23 @@ var state = {
         $(view.placeholder.mediaType).html(media);
     },
 
-    callStarted: function() {
+    callStarted: function(mediaType) {
         $(view.href.callTab).click();
         $(view.button.startCall).addClass('disabled');
         $(view.button.holdCall).removeClass('hidden');
         $(view.button.resumeCall).addClass('hidden');
         $(view.div.video).removeClass('hidden');
+        if (mediaType === 'audio') {
+            $(view.audio.remote).removeClass('hidden');
+            $(view.audio.local).removeClass('hidden');
+            $(view.video.remote).addClass('hidden');
+            $(view.video.local).addClass('hidden');
+        } else {
+            $(view.audio.remote).addClass('hidden');
+            $(view.audio.local).addClass('hidden');
+            $(view.video.remote).removeClass('hidden');
+            $(view.video.local).removeClass('hidden');
+        }
     },
 
     callHeld: function() {

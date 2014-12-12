@@ -16,6 +16,9 @@
 
 package com.att.api.webrtc.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import com.att.api.oauth.OAuthToken;
 import com.att.api.rest.APIResponse;
 import com.att.api.rest.RESTClient;
@@ -48,6 +51,12 @@ public class WebRTCService extends APIService {
      * @throws RESTException if request was not successful
      */
     public void associateToken(String userId) throws RESTException {
+        try {
+            userId = URLEncoder.encode(userId, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RESTException(e);
+        }
+
         String endpoint = getFQDN() + "/RTC/v1/userIds/" + userId;
 
         APIResponse response = new RESTClient(endpoint)

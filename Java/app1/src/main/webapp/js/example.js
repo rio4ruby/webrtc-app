@@ -257,14 +257,6 @@ $(document).ready(function() {
         phone.logout();
     });
 
-    $(view.button.updateE911).click(function() {
-        var e911 = $(view.input.e911).val();
-
-        phone.associateE911Id({
-                e911Id: e911,
-        });
-    });
-
     /*******************\
     -** Call handling **-
     \*******************/
@@ -385,11 +377,6 @@ $(document).ready(function() {
             "Session disconnected: " + JSON.stringify(data));
         state.sessionStopped();
     });
-    
-    phone.on('address-updated', function onAddressUpdated(data) {
-        updateNotification('alert-info', 
-            "E911 address updated: " + JSON.stringify(data));
-    });
 
     phone.on('call:incoming', function onCallIncoming(data) {
         updateNotification('alert-info', 
@@ -406,7 +393,7 @@ $(document).ready(function() {
     phone.on('answering', function onAnswer(data) {
         updateNotification('alert-info', 
             'Answering call: ' + JSON.stringify(data));
-        state.callStarted();
+        state.callStarted(data.mediaType);
     });
 
     phone.on('media:established', function onCallConnected(data) {
@@ -417,7 +404,7 @@ $(document).ready(function() {
     phone.on('call:connected', function onCallConnected(data) {
         updateNotification('alert-success', 
             'Call connected: ' + JSON.stringify(data));
-        state.callStarted();
+        state.callStarted(data.mediaType);
         callCounter.start();
     });
 

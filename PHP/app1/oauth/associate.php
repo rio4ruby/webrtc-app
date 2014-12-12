@@ -19,9 +19,18 @@ try {
     $token = unserialize($_SESSION['token']);
     $webrtcSrvc = new WebRTCService($FQDN, $token); 
     $webrtcSrvc->associateToken($user);
-    http_response_code(201);
+    if (function_exists('http_response_code')) {
+        http_response_code(500);
+    } else {
+        header("HTTP/1.1 201 Created");
+    }
 } catch (Exception $e) {
-    http_response_code(500);
+    if (function_exists('http_response_code')) {
+        http_response_code(500);
+    } else {
+        header("HTTP/1.1 500 Internal Server Error");
+    }
+
     echo json_encode($e->getMessage());
 }
 

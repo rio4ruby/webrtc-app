@@ -17,8 +17,8 @@
 package com.att.api.webrtc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.att.api.controller.APIController;
-import com.att.api.webrtc.model.ConfigBean;
 
 public class AuthcodeRedirectController extends APIController {
     private static final long serialVersionUID = 1L;
@@ -41,7 +40,11 @@ public class AuthcodeRedirectController extends APIController {
 
         try {
             JSONObject json = new JSONObject().put("consent_url", redirect); 
-            response.getWriter().write(json.toString());
+
+            response.setContentType("text/html");
+            PrintWriter writer = response.getWriter();
+            writer.print(json);
+            writer.flush();
         } catch (Exception e) {
             response.sendError(500, e.getMessage());
         }
@@ -49,9 +52,6 @@ public class AuthcodeRedirectController extends APIController {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("cfg", new ConfigBean());
-        final String forward = "/WEB-INF/WebRTC.jsp";
-        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-        dispatcher.forward(request, response);
+        doPost(request, response);
     }
 }
