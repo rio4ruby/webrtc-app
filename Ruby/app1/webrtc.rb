@@ -35,7 +35,6 @@ class WebRTC < Sinatra::Application
   configure do
     enable :sessions
     config_file 'config.yml'
-    set :port, settings.port
 
     use Rack::Session::Cookie, :key => 'rack.session'
     set :session_secret, settings.session_secret
