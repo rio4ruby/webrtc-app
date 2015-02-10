@@ -32,8 +32,8 @@ public class ConfigBean implements Serializable {
         return getConfig().getProperty("e911Id");
     }
 
-    public String getVtnNumbers() throws IOException {
-        return getConfig().getProperty("vtnNumbers");
+    public String[] getVtnNumbers() throws IOException {
+        return getConfig().getProperty("vtnNumbers").split(",");
     }
 
     public String getAccountDomain() throws IOException {

@@ -74,14 +74,39 @@ Each sample application contains an application.properties file in the
 'src/main/resources/' folder. which contains configurable parameters with
 comments to guide you through the configuration process.
 
-Note: If your app is promoted from the Sandbox environment to the Production
+Note: _If your app is promoted from the Sandbox environment to the Production
 environment, you must update the application.properties file with
-Production-specific keys and settings.
+Production-specific keys and settings._
+
+The following are short descriptions of commonly used parameters:
+
+**REQUIRED**
+
+1. FQDN: The main server handling requests, ex: https://api.att.com
+2. clientId: set the value as per your registered application 'API
+key' field value 
+3. clientSecret: set the value as per your registered application
+'Secret key' field value
+4. accountDomain:  set the value as per your organizations domain for webrtc
+5. redirectUri: only required for authorization flow (where consent is
+redirected after success/failure)
+
+**OPTIONAL**
+
+1. e911Id: set this to a valid e911 identifier that you have generated using
+the e911 api
+2. vtnNumbers: set this to a list of comma seperated vtn numbers created in
+your account
 
 This sample app also uses a config.js file, located in the /js
 directory, which you must update with your app-specific details. For assistance
 with configuration values, see the
 [AT&T Enhanced WebRTC SDK Github repository](https://github.com/attdevsupport/ewebrtc-sdk).
+
+**REQUIRED**
+
+1. dhs: set this to your personal developer hosted server
+2. ewebrtc\_domain: set the value as per your organizations domain for webrtc
 
 ## <a name="running"></a> Running the App
 

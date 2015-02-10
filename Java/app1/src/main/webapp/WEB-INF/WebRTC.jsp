@@ -237,9 +237,7 @@
                           <div class="col-lg-5 form-group">
                             <select id="vtnNumber" class="form-control">
                               <c:forEach var="number" items="${cfg.vtnNumbers}">
-                                <option>
-                                  vtn:<c:out value="${number}" />
-                                </option>
+                                <option>vtn:<c:out value="${number}" /></option>
                               </c:forEach>
                             </select>
                           </div>
