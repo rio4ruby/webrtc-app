@@ -1,16 +1,37 @@
-proxy: 
+# Mandatory parameter that should be set to the registered application's 
+# 'API Key' value.
 client_id:          
-client_secret:       
-account_domain: '@mydomain.org'
-fqdn:   'https://api.att.com'
-consent_redirect: 
-session_secret: 'super secret session key'
 
+# Mandatory parameter that should be set to the registered application's
+# 'Secret Key' value.
+client_secret:       
+
+# Set the value as per your organizations domain for webrtc
+account_domain: '@mydomain.org'
+
+# Fully Qualified Domain Name. Mandatory parameter that points to the location
+# of AT&T's API.
+fqdn:   'https://api.att.com'
+
+# Mandatory parameter that specifies the authorization redirect URL. This is
+# the URL that the consent flow will redirect to.
+consent_redirect: 
+
+# Valid e911 identifier that you have generated using the e911 api
 e911id: 'valid e911 id'
+
+# List of comma seperated vtn numbers created in your account
 vtn_numbers: '5555555555'
 
+# setup http sessions to use a provided secret
+session_secret: 'super secret session key'
+
+# Used to set links on production sample apps
 github_server_link: 'http://github.com'
 github_client_link: 'http://github.com'
 source_link: #
 download_link: #
-help_link: #
+
+# Set this to use a proxy on the server side
+proxy: 
+

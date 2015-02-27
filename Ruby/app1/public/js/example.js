@@ -273,7 +273,7 @@ $(document).ready(function() {
         }
         else {
             phone.dial({
-                    destination: number,
+                    destination: phone.cleanPhoneNumber(number),
                     mediaType: ctype,
                     localMedia: $(view.video.local)[0],
                     remoteMedia: $(view.video.remote)[0]

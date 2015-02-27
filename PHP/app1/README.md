@@ -7,14 +7,12 @@ the elements of this API.
 This file covers basic setup, configuration, and launch of the sample app,
 including steps required to register the app, generate the API app key and app
 secret, configure the Apache server with PHP, and run the fully functional
-sample app. For more detailed information, requirements, and code examples, see
-the [AT&T Enhanced WebRTC SDK page](http://developer.att.com/sdks-plugins/enhanced-webrtc)
-on the AT&T Developer Program Web site.
+sample app.
 
  - [Registration](#registration)
  - [Installation](#install)
  - [Configuration](#config)
- - [Running the Application](#running)
+ - [Running the App](#running)
 
 ## <a name="registration"></a> Registration
 
@@ -77,10 +75,31 @@ parameters with comments to guide you through the configuration process.
 Note: If your app is promoted from the Sandbox environment to the Production
 environment, you must update the config.php file with Production-specific keys and settings.
 
+**REQUIRED**
+
+1. $FQDN: The main server handling requests, ex: https://api.att.com
+2. $api\_key: set the value as per your registered application 'API
+key' field value 
+3. $secret\_key: set the value as per your registered application
+'Secret key' field value
+4. $accountDomain:  set the value as per your organizations domain for webrtc
+5. $authorize\_redirect\_uri: only required for authorization flow (where consent is
+redirected after success/failure)
+
+**OPTIONAL**
+
+1. $e911Id: set this to a valid e911 identifier that you have generated using
+the e911 api
+2. $vtns: set this to a list of comma seperated vtns created in
+your account
+3. $proxy\_host: set this if you require your server to use a proxy
+4. $proxy\_port: set this if you require a proxy to run on specific port
+5. $accept\_all\_certs: set this to true to skip ssl validation (do not set this
+   unless you are absolutely sure)
+
+
 This sample app also uses a config.js file, located in the /js directory, which
-you must update with your app-specific details. For assistance with
-configuration values, see the
-[AT&T Enhanced WebRTC SDK Github repository](https://github.com/attdevsupport/ewebrtc-sdk).
+you must update with your app-specific details.
 
 ## <a name="running"></a> Running the App
 
@@ -89,7 +108,4 @@ Apache and use a WebRTC-compatible Web browser to browse to where you copied
 the sample application folder.
 
 For example, if you're using a local server you might use the URL
-*http://localhost/app1/index.php*. For more information on running the sample
-app, see the
-[AT&T Enhanced WebRTC SDK page](http://developer.att.com/sdks-plugins/enhanced-webrtc)
-on the AT&T Developer Program Web site.
+*http://localhost/app1/index.php*.

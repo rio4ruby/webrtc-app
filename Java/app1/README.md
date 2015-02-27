@@ -7,9 +7,7 @@ the elements of this API.
 This file covers basic setup, configuration, and launch of the sample app,
 including steps required to register the app, generate the API app key and app
 secret, configure the Jetty server with Java, and run the fully functional
-sample app. For more detailed information, requirements, and code examples,
-see the [AT&T Enhanced WebRTC SDK page](http://developer.att.com/sdks-plugins/enhanced-webrtc)
-on the AT&T Developer Program Web site.
+sample app. 
 
  - [Registration](#registration)
  - [Installation](#install)
@@ -97,11 +95,13 @@ redirected after success/failure)
 the e911 api
 2. vtnNumbers: set this to a list of comma seperated vtn numbers created in
 your account
+3. proxyHost: set this if you require your server to use a proxy
+4. proxyPort: set this if you require a proxy to run on specific port
+5. trustAllCerts: set this to true to skip ssl validation (do not set this
+   unless you are absolutely sure)
 
 This sample app also uses a config.js file, located in the /js
-directory, which you must update with your app-specific details. For assistance
-with configuration values, see the
-[AT&T Enhanced WebRTC SDK Github repository](https://github.com/attdevsupport/ewebrtc-sdk).
+directory, which you must update with your app-specific details.
 
 **REQUIRED**
 
@@ -128,6 +128,9 @@ Jetty documentation. To connect to the sample app, open a web
 browser and visit 'http://localhost:8080/<appname>' replacing <appname> with
 the app's name.
 
-For more information on running the sample app, see the
-[AT&T Enhanced WebRTC SDK page](http://developer.att.com/sdks-plugins/enhanced-webrtc)
-on the AT&T Developer Program Web site.
+If you would like to build a war file to run on any Java webserver (such as
+tomcat) use the following command:
+
+```shell
+mvn clean package
+```

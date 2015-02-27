@@ -126,7 +126,9 @@ use Att\Api\Util\Util;
             <div class="col-lg-12">
               <div class="col-lg-1"></div>
               <div class="col-lg-10">
-                <div class="alert alert-warning text-center"><strong>This application runs best in chrome</strong></div>
+                <div class="alert alert-warning text-center">
+                  <strong>This application runs best in chrome</strong>
+                </div>
               </div>
               <div class="col-lg-1"></div>
             </div>
@@ -413,7 +415,7 @@ use Att\Api\Util\Util;
                           <input name="phoneNumber" type="text" 
                               class="form-control" placeholder="Enter phone number or user name"
                               data-toggle="tooltip" data-placement="right"
-                              data-title="Format must be one of the following: 555-555-5555, 5555555555, 15555555555, vtn:5555555555 or user@domain.com">
+                              data-title="Format must be one of the following: 15555555555 (number with country code), or user@domain.com">
                         </div><!--/.col-lg-4-->
                       </div><!--/.row-->
                       <div class="row">
@@ -541,7 +543,7 @@ use Att\Api\Util\Util;
                             <input name="participant" type="text"
                                 class="form-control" placeholder="Participant"
                                 data-toggle="tooltip" data-placement="left"
-                                data-title="Format must be one of the following: 555-555-5555, 5555555555, 15555555555, vtn:5555555555 or user@domain.com">
+                                data-title="Format must be one of the following: 15555555555 (number with country code), or user@domain.com">
                             <button id="addParticipant" type="button" class="btn btn-primary">
                               Add Participant
                             </button>
@@ -752,7 +754,7 @@ post <span class="SpecialChar">'</span><span class="String">/oauth/authorize</sp
 </pre>
                 </div><!--./tab-pane-->
                 <div class="tab-pane" id="php_consent">
-<pre id='vimCodeElement'>
+<pre>
 $<span class="Identifier">scope</span> = &quot;<span class="Constant">WEBRTCMOBILE</span>&quot;;
 $<span class="Identifier">codeUrl</span> = $<span class="Identifier">FQDN</span> . '<span class="Constant">/oauth/v4/authorize</span>';
 $<span class="Identifier">codeRequest</span> = <span class="PreProc">new</span> OAuthCodeRequest<span class="Special">(</span>
