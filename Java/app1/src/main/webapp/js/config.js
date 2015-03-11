@@ -1,5 +1,5 @@
 /*
-* Copyright 2014 AT&T
+* Copyright 2015 AT&T
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
  
 var config = {
-    dhs: 'http://localhost',
+    dhs: 'http://localhost:8080/webrtc',
     fqdn: 'https://api.att.com',
     ewebrtc_domain: "mydomain.org",
 

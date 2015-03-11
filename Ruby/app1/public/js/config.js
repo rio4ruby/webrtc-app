@@ -15,7 +15,7 @@
 */
  
 var config = {
-    dhs: 'http://localhost',
+    dhs: 'http://localhost:9292',
     fqdn: 'https://api.att.com',
     ewebrtc_domain: "mydomain.org",
 

@@ -65,7 +65,7 @@ use Att\Api\Util\Util;
             <div class="text-center">
               <div class="row">
                 <div class="col-sm-2">
-                  <a class="brand" href="index.html">
+                  <a class="brand" href="http://developer.att.com/">
                     <img src="https://developer.att.com/static-assets/images/logo-developer.png">
                     </a>
                   </div>

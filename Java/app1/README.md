@@ -16,14 +16,14 @@ sample app.
 
 ## <a name="registration"></a> Registration
 
-This section describes the necessary steps to register an app with
-the proper services and endpoints.
+This section describes the necessary steps to register an app with the proper
+services and endpoints.
 
 To register an app and obtain the appropriate keys for AT&T APIs, you must
-enroll in the AT&T Developer Program at the
-[AT&T Developer Program Web site](http://developer.att.com/). If you don't have
-an existing account, you can create one by clicking "Get Started Free." Your
-account must have premium access in order to use the WebRTC API.
+enroll in the AT&T Developer Program at the [AT&T Developer Program Web
+site](http://developer.att.com/). If you don't have an existing account, you
+can create one by clicking "Get Started Free." Your account must have premium
+access in order to use the WebRTC API.
 
 To register an app:
 
@@ -33,13 +33,13 @@ To register an app:
 4. Choose _Enhanced WebRTC_ from the list of APIs.
 5. Complete the information necessary to use Enhanced WebRTC.
 
-**Note:** the **OAuth Redirect URL** field must contain
-the URL where you want the OAuth provider to redirect users when they
-successfully authenticate and authorize your application.
+**Note:** the **OAuth Redirect URL** field must contain the URL where you want
+the OAuth provider to redirect users when they successfully authenticate and
+authorize your application. For this application the default should be set to
+http://localhost:8080
 
-Once your application is registered, you will receive
-an App Key and App Secret, which enable your app to communicate
-with AT&T Enhanced WebRTC API.
+Once your application is registered, you will receive an App Key and App
+Secret, which enable your app to communicate with AT&T Enhanced WebRTC API.
 
 A newly registered application is restricted to the Sandbox environment. When
 you're ready to move it to the Production environment, click **Promote to
@@ -69,7 +69,7 @@ documentation.
 ## <a name="config"></a> Configuration
 
 Each sample application contains an application.properties file in the
-'src/main/resources/' folder. which contains configurable parameters with
+'src/main/resources/' folder, which contains configurable parameters with
 comments to guide you through the configuration process.
 
 Note: _If your app is promoted from the Sandbox environment to the Production
@@ -81,31 +81,33 @@ The following are short descriptions of commonly used parameters:
 **REQUIRED**
 
 1. FQDN: The main server handling requests, ex: https://api.att.com
-2. clientId: set the value as per your registered application 'API
-key' field value 
-3. clientSecret: set the value as per your registered application
-'Secret key' field value
+2. clientId: set the value as per your registered application 'API key' field
+   value 
+3. clientSecret: set the value as per your registered application 'Secret key'
+   field value
 4. accountDomain:  set the value as per your organizations domain for webrtc
-5. redirectUri: only required for authorization flow (where consent is
-redirected after success/failure)
+5. redirectUri:  Required for authorization flow. By default, using jetty, this
+   application will use: http://localhost:8080/webrtc/index.jsp
 
 **OPTIONAL**
 
 1. e911Id: set this to a valid e911 identifier that you have generated using
-the e911 api
-2. vtnNumbers: set this to a list of comma seperated vtn numbers created in
+the e911 API
+2. vtnNumbers: set this to a list of comma separated VTNs created in
 your account
 3. proxyHost: set this if you require your server to use a proxy
 4. proxyPort: set this if you require a proxy to run on specific port
-5. trustAllCerts: set this to true to skip ssl validation (do not set this
+5. trustAllCerts: set this to true to skip SSL validation (do not set this
    unless you are absolutely sure)
 
-This sample app also uses a config.js file, located in the /js
-directory, which you must update with your app-specific details.
+This sample app also uses a config.js file, located in the /js directory, which
+you must update with your app-specific details.
 
 **REQUIRED**
 
-1. dhs: set this to your personal developer hosted server
+1. dhs: set this to  the base URL your application is running under without any
+   ending slash (/). For this example the default value is
+   http://localhost:8080/webrtc
 2. ewebrtc\_domain: set the value as per your organizations domain for webrtc
 
 ## <a name="running"></a> Running the App
@@ -122,13 +124,12 @@ build and run the application:
 mvn clean jetty:run
 ```
 
-This command should run the app on port 8080. Make sure no other
-application is running on port 8080. To change the port, consult the
-Jetty documentation. To connect to the sample app, open a web
-browser and visit 'http://localhost:8080/<appname>' replacing <appname> with
-the app's name.
+This command should run the app on port 8080. Make sure no other application is
+running on port 8080. To change the port, consult the Jetty documentation. To
+connect to the sample app, open a web browser and visit
+'http://localhost:8080/webrtc/index.jsp' 
 
-If you would like to build a war file to run on any Java webserver (such as
+If you would like to build a war file to run on any Java web server (such as
 tomcat) use the following command:
 
 ```shell

@@ -12,18 +12,18 @@ sample app.
  - [Registration](#registration)
  - [Installation](#install)
  - [Configuration](#config)
- - [Running the App](#running)
+
 
 ## <a name="registration"></a> Registration
 
-This section describes the necessary steps to register an app with
-the proper services and endpoints.
+This section describes the necessary steps to register an app with the proper
+services and endpoints.
 
 To register an app and obtain the appropriate keys for AT&T APIs, you must
-enroll in the AT&T Developer Program at the
-[AT&T Developer Program Web site](http://developer.att.com/). If you don't have
-an existing account, you can create one by clicking "Get Started Free." Your
-account must have premium access in order to use the WebRTC API.
+enroll in the AT&T Developer Program at the [AT&T Developer Program Web
+site](http://developer.att.com/). If you don't have an existing account, you
+can create one by clicking "Get Started Free." Your account must have premium
+access in order to use the WebRTC API.
 
 To register an app:
 
@@ -33,13 +33,13 @@ To register an app:
 4. Choose _Enhanced WebRTC_ from the list of APIs.
 5. Complete the information necessary to use Enhanced WebRTC.
 
-**Note:** the **OAuth Redirect URL** field must contain
-the URL where you want the OAuth provider to redirect users when they
-successfully authenticate and authorize your application.
+**Note:** the **OAuth Redirect URL** field must contain the URL where you want
+the OAuth provider to redirect users when they successfully authenticate and
+authorize your application. For this application the default should be set to
+http://localhost
 
-Once your application is registered, you will receive
-an App Key and App Secret, which enable your app to communicate
-with AT&T Enhanced WebRTC API.
+Once your application is registered, you will receive an App Key and App
+Secret, which enable your app to communicate with AT&T Enhanced WebRTC API.
 
 A newly registered application is restricted to the Sandbox environment. When
 you're ready to move it to the Production environment, click **Promote to
@@ -65,26 +65,28 @@ Requirements:
 
 Install Apache, PHP, and the PHP cURL extension according to their respective
 documentation. Copy the sample app folder to your Apache Web root folder,
-for example /var/www/html.
+for example /var/www/html. By default, you should name the folder webrtc, such
+that the index.php file would be: /var/www/html/webrtc/index.php.
 
 ## <a name="config"></a> Configuration
 
 The sample app contains a config.php file, which contains configurable
 parameters with comments to guide you through the configuration process.
 
-Note: If your app is promoted from the Sandbox environment to the Production
-environment, you must update the config.php file with Production-specific keys and settings.
+Note: _If your app is promoted from the Sandbox environment to the Production
+environment, you must update the config.php file with Production-specific keys
+and settings._
 
 **REQUIRED**
 
 1. $FQDN: The main server handling requests, ex: https://api.att.com
-2. $api\_key: set the value as per your registered application 'API
-key' field value 
-3. $secret\_key: set the value as per your registered application
-'Secret key' field value
+2. $api\_key: set the value as per your registered application 'API key' field
+   value 
+3. $secret\_key: set the value as per your registered application 'Secret key'
+   field value
 4. $accountDomain:  set the value as per your organizations domain for webrtc
-5. $authorize\_redirect\_uri: only required for authorization flow (where consent is
-redirected after success/failure)
+5. $authorize\_redirect\_uri: Required for authorization flow. By default, this
+   application will use: http://localhost/webrtc/index.php
 
 **OPTIONAL**
 
@@ -97,9 +99,15 @@ your account
 5. $accept\_all\_certs: set this to true to skip ssl validation (do not set this
    unless you are absolutely sure)
 
-
 This sample app also uses a config.js file, located in the /js directory, which
 you must update with your app-specific details.
+
+**REQUIRED**
+
+1. dhs: set this to  the base URL your application is running under without any
+   ending slash (/). For this example the default value is
+   http://localhost0/webrtc
+2. ewebrtc\_domain: set the value as per your organizations domain for webrtc
 
 ## <a name="running"></a> Running the App
 
@@ -108,4 +116,4 @@ Apache and use a WebRTC-compatible Web browser to browse to where you copied
 the sample application folder.
 
 For example, if you're using a local server you might use the URL
-*http://localhost/app1/index.php*.
+*http://localhost/webrtc/index.php*.
