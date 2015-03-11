@@ -65,11 +65,11 @@ use Att\Api\Util\Util;
             <div class="text-center">
               <div class="row">
                 <div class="col-sm-2">
-                  <a class="brand" href="http://developer.att.com/">
+                  <a class="brand" href="http://developer.att.com/" target="_blank">
                     <img src="https://developer.att.com/static-assets/images/logo-developer.png">
-                    </a>
-                  </div>
+                  </a>
                 </div>
+              </div>
             </div>
           </div>
         </div><!--./header-->
